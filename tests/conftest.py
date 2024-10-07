@@ -3,21 +3,19 @@ from contextlib import contextmanager
 
 import fakeredis
 import pytest
-from sqlalchemy import create_engine, NullPool
+from fakeredis import aioredis as fake_aioredis
+from redis import asyncio as aioredis
+from sqlalchemy import NullPool, create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy_utils import database_exists, drop_database, create_database
+from sqlalchemy_utils import create_database, database_exists, drop_database
 from starlette.testclient import TestClient
 
+from core import settings
 from core.db import queries
 from core.db.models import BaseModel
 from core.main import app
-from core import settings
 
-from redis import asyncio as aioredis
-
-from fakeredis import aioredis as fake_aioredis
-
-DB_URL = f'{settings.DB_URL}_test'
+DB_URL = f"{settings.DB_URL}_test"
 
 
 @pytest.fixture(scope="session")
@@ -28,7 +26,7 @@ def event_loop(request):
     loop.close()
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope="session")
 def test_db_url():
     return DB_URL
 

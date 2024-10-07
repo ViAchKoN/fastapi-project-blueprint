@@ -7,6 +7,6 @@ class ItemBaseSchemaFactory(factory.Factory):
     class Meta:
         model = schemas.ItemBaseSchema
 
-    name = factory.Faker('word')
-    number = factory.Faker('pyint')
-    is_valid = factory.Faker('boolean')
+    name = factory.Faker("word")
+    number = factory.Faker("pyint")
+    is_valid = factory.Faker("boolean")

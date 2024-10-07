@@ -1,3 +1,5 @@
+exclude: '^$|tests|deps|alembic'
+
 repos:
   - repo: local
     hooks:

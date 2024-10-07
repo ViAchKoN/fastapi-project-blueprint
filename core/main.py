@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Body, HTTPException
+from fastapi import Body, FastAPI, HTTPException
 
-from core.db import queries
 from core import schemas
+from core.db import queries
+
 
 app = FastAPI()
 
@@ -38,9 +39,7 @@ def add_items(
         embed=True,
     )
 ) -> list[schemas.ItemSchema]:
-    added_items = queries.add_items(
-        items=items
-    )
+    added_items = queries.add_items(items=items)
     return added_items
 
 
@@ -55,11 +54,9 @@ def update_item(
     update_data: schemas.ItemBaseSchema = Body(
         ...,
         embed=True,
-    )
+    ),
 ) -> None:
-    if queries.get_item(
-        item_id=item_id
-    ) is None:
+    if queries.get_item(item_id=item_id) is None:
         raise HTTPException(status_code=404, detail="Item not found")
 
     item = queries.update_item(
@@ -74,14 +71,8 @@ def update_item(
     summary="Delete an item",
     status_code=204,
 )
-def delete_item(
-    item_id: int
-) -> None:
-    if queries.get_item(
-        item_id=item_id
-    ) is None:
+def delete_item(item_id: int) -> None:
+    if queries.get_item(item_id=item_id) is None:
         raise HTTPException(status_code=404, detail="Item not found")
 
-    queries.delete_item(
-        item_id=item_id
-    )
+    queries.delete_item(item_id=item_id)
