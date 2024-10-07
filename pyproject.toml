@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "fastapi-project-base"
+version = "0.1.0"
+description = ""
+authors = ["ViAchKoN"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["standard"], version = "^0.112.1"}
+sqlalchemy = "^2.0.32"
+alembic = "^1.13.2"
+psycopg2-binary = "^2.9.9"
+asyncpg = "^0.29.0"
+redis = "^5.0.8"
+sqlalchemy-utils = "^0.41.2"
+pydantic-settings = "^2.4.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.2"
+factory-boy = "^3.3.1"
+fakeredis = "^2.24.1"
+faker = "^28.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

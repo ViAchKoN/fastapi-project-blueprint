@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    volumes:
+      - ./core:/app/core
+      - ./alembic:/app/alembic
+      - ./tests:/app/tests
+    ports:
+      - "8010:8010"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_HOST=db
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "project_base"
+    ports:
+        - 5432:5432
